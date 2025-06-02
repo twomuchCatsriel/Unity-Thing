@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +10,7 @@ public class movement : MonoBehaviour
     Rigidbody2D rb;
     bool canJump = true;
     public float jumpHeight;
+    public float moveSpeed;
 
     void Start()
     {
@@ -23,8 +23,7 @@ public class movement : MonoBehaviour
     void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-        Debug.Log(move);
-
+        rb.linearVelocity = new Vector2(move[0] * moveSpeed, rb.linearVelocityY);
 
         if (jumpAction.IsPressed() && canJump == true)
         {
