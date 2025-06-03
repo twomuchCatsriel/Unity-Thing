@@ -9,6 +9,8 @@ public class movement : MonoBehaviour
     InputAction jumpAction;
     InputAction SprintAction;
     Rigidbody2D rb;
+    Animator animator;
+    SpriteRenderer sr;
     bool canJump = true;
     public float jumpHeight;
     public float DefaultmoveSpeed;
@@ -22,6 +24,8 @@ public class movement : MonoBehaviour
         jumpAction = InputSystem.actions.FindAction("Jump");
         SprintAction = InputSystem.actions.FindAction("Sprint");
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         moveSpeed = DefaultmoveSpeed;
     }
 
@@ -30,7 +34,7 @@ public class movement : MonoBehaviour
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
 
-        if (SprintAction.IsPressed())
+        if (SprintAction.IsPressed()) // Sprint \
         {
             moveSpeed = sprintSpeed;
         }
@@ -39,10 +43,34 @@ public class movement : MonoBehaviour
             moveSpeed = DefaultmoveSpeed;
         }
 
+        if (move.x < 0)
+        {// Control animations 
+            sr.flipX = true;
+            animator.Play("Niko_Run");
+        }
+        else if (move.x > 0)
+        {
+            sr.flipX = false;
+            animator.Play("Niko_Run");
+        }
+
+
+        else
+        {
+            if (canJump == true) // Only play the idle animation if the player is not jumping
+            {
+                animator.Play("Niko_Idle");
+            }
+        }
+
         rb.linearVelocity = new Vector2(move[0] * moveSpeed, rb.linearVelocityY);
 
         if (jumpAction.IsPressed() && canJump == true)
         {
+            if (rb.linearVelocityX == 0)
+            {
+                animator.Play("Niko_Fall");      
+            }
             canJump = false;
             rb.linearVelocity = new Vector2(0, jumpHeight);
         }
@@ -53,6 +81,7 @@ public class movement : MonoBehaviour
         if (collision.gameObject.CompareTag("Solid"))
         {
             canJump = true;
+            animator.Play("Niko_Idle");
         }
     }
 }
