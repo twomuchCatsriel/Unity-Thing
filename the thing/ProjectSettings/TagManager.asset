@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Solid
+  - Enemies
+  - EnemyProjectiles
+  - FriendlyProjectiles
   layers:
   - Default
   - TransparentFX

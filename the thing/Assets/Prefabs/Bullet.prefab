@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4715832043087273133}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: EnemyProjectiles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,4 +161,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
