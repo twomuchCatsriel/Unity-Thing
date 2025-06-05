@@ -11,6 +11,10 @@ public class movement : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer sr;
+
+    // other scripts
+    nikoWeapons weaponsScript;
+
     bool canJump = true;
     public float jumpHeight;
     public float DefaultmoveSpeed;
@@ -27,6 +31,8 @@ public class movement : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         moveSpeed = DefaultmoveSpeed;
+
+        weaponsScript = GetComponent<nikoWeapons>();
     }
 
     // Update is called once per frame
@@ -43,24 +49,25 @@ public class movement : MonoBehaviour
             moveSpeed = DefaultmoveSpeed;
         }
 
-        if (move.x < 0)
-        {// Control animations 
-            sr.flipX = true;
-            animator.Play("Niko_Run");
-        }
-        else if (move.x > 0)
+        if (weaponsScript.cooldown < 0)
         {
-            sr.flipX = false;
-            animator.Play("Niko_Run");
-        }
-
-
-        else
-        {
-            if (canJump == true) // Only play the idle animation if the player is not jumping
-            {
-                animator.Play("Niko_Idle");
+            if (move.x < 0)
+            {// Control animations 
+                sr.flipX = true;
+                animator.Play("Niko_Run");
             }
+            else if (move.x > 0)
+            {
+                sr.flipX = false;
+                animator.Play("Niko_Run");
+            }
+            else
+            {
+                if (canJump == true) // Only play the idle animation if the player is not jumping
+                {
+                    animator.Play("Niko_Idle");
+                }
+            }   
         }
 
         rb.linearVelocity = new Vector2(move[0] * moveSpeed, rb.linearVelocityY);

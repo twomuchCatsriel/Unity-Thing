@@ -7,10 +7,13 @@ public class nikoWeapons : MonoBehaviour
 {
     InputAction AttackAction;
     InputAction ShootAction;
+    SpriteRenderer sr;
+    Animator anim;
 
-    float cooldown = -1;
+    public float cooldown = -1;
     float defaultGunCooldown = 0.3f;
     float defaultSwordCooldown = 1; 
+
 
     bool canAttack = true;
 
@@ -19,6 +22,9 @@ public class nikoWeapons : MonoBehaviour
     {
         AttackAction = InputSystem.actions.FindAction("Attack");
         ShootAction = InputSystem.actions.FindAction("Shoot");
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -50,6 +56,8 @@ public class nikoWeapons : MonoBehaviour
         {
             Debug.Log(msg);
             cooldown = defaultSwordCooldown;
+
+            anim.Play("Niko_Slash");
         }
     }
 }
