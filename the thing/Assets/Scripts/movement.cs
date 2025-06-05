@@ -83,5 +83,10 @@ public class movement : MonoBehaviour
             canJump = true;
             animator.Play("Niko_Idle");
         }
+        else if (collision.gameObject.CompareTag("Enemies"))
+        {
+            canJump = true;
+            animator.Play("Niko_Idle");
+        }
     }
 }
