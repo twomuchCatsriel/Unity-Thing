@@ -12,7 +12,7 @@ public class nikoWeapons : MonoBehaviour
 
     float cooldown = -1;
     float defaultGunCooldown = 0.3f;
-    float defaultSwordCooldown = 0.65f;
+    float defaultSwordCooldown = 0.5f;
 
     public bool canAttack = true;
 

@@ -63,6 +63,10 @@ public class movement : MonoBehaviour
             }
             else
             {
+                if (canJump == false) // I FINALLY FIXED THIS STUPID BUG.
+                {
+                    animator.Play("Niko_Idle");
+                }
                 if (canJump == true && weaponsScript.canAttack) // Only play the idle animation if the player is not jumping
                 {
                     animator.Play("Niko_Idle");
