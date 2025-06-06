@@ -49,7 +49,7 @@ public class movement : MonoBehaviour
             moveSpeed = DefaultmoveSpeed;
         }
 
-        if (weaponsScript.cooldown < 0)
+        if (weaponsScript.canAttack)
         {
             if (move.x < 0)
             {// Control animations 
@@ -63,20 +63,20 @@ public class movement : MonoBehaviour
             }
             else
             {
-                if (canJump == true) // Only play the idle animation if the player is not jumping
+                if (canJump == true && weaponsScript.canAttack) // Only play the idle animation if the player is not jumping
                 {
                     animator.Play("Niko_Idle");
                 }
-            }   
+            }
         }
 
         rb.linearVelocity = new Vector2(move[0] * moveSpeed, rb.linearVelocityY);
 
-        if (jumpAction.IsPressed() && canJump == true)
+        if (jumpAction.triggered && canJump == true)
         {
-            if (rb.linearVelocityX == 0)
+            if (rb.linearVelocityX == 0  && weaponsScript.canAttack)
             {
-                animator.Play("Niko_Fall");      
+                animator.Play("Niko_Fall");
             }
             canJump = false;
             rb.linearVelocity = new Vector2(0, jumpHeight);
@@ -87,12 +87,20 @@ public class movement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Solid"))
         {
-            canJump = true;
-            animator.Play("Niko_Idle");
+            CollisionCode();
         }
         else if (collision.gameObject.CompareTag("Enemies"))
         {
-            canJump = true;
+            CollisionCode();
+        }
+    }
+
+    void CollisionCode()
+    {
+        canJump = true;
+
+        if (weaponsScript.canAttack)
+        {
             animator.Play("Niko_Idle");
         }
     }

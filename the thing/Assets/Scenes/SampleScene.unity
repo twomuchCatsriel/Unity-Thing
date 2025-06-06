@@ -4074,7 +4074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b3e5ce789ac92043a4e3a1037c6f0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: -1
+  canAttack: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4463,6 +4463,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 741565050975819475, guid: 8a85d521bee0ba144ba2423f594d043e, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1469400940561673683, guid: 8a85d521bee0ba144ba2423f594d043e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.4

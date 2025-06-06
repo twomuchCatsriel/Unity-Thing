@@ -10,12 +10,11 @@ public class nikoWeapons : MonoBehaviour
     SpriteRenderer sr;
     Animator anim;
 
-    public float cooldown = -1;
+    float cooldown = -1;
     float defaultGunCooldown = 0.3f;
-    float defaultSwordCooldown = 1; 
+    float defaultSwordCooldown = 0.65f;
 
-
-    bool canAttack = true;
+    public bool canAttack = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,11 +33,12 @@ public class nikoWeapons : MonoBehaviour
 
         if (cooldown < 0)
         {
-            if (AttackAction.IsPressed())
+            canAttack = true;
+            if (AttackAction.triggered)
             {
                 Attack("Slash", true);
             }
-            else if (ShootAction.IsPressed())
+            else if (ShootAction.triggered)
             {
                 Attack("Pew", false);
             }
@@ -50,11 +50,13 @@ public class nikoWeapons : MonoBehaviour
         if (type == false) // Gun
         {
             Debug.Log(msg);
+            canAttack = false;
             cooldown = defaultGunCooldown;
         }
         else if (type == true) // sword
         {
             Debug.Log(msg);
+            canAttack = false;
             cooldown = defaultSwordCooldown;
 
             anim.Play("Niko_Slash");
