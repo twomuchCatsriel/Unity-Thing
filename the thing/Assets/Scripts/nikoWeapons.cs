@@ -19,7 +19,7 @@ public class nikoWeapons : MonoBehaviour
 
     GameObject hitbox;
     BoxCollider2D hitboxCollider;
-    
+
     public bool canAttack = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,10 +34,6 @@ public class nikoWeapons : MonoBehaviour
 
         movementScript = GetComponent<movement>();
         hitboxCollider = hitbox.GetComponent<BoxCollider2D>();
-
-
-        Debug.Log(offsetAmount);
-
     }
 
     // Update is called once per frame

@@ -9,7 +9,6 @@ public class basicEnemy : MonoBehaviour
     Rigidbody2D rb2d;
     float timebetweenshots;
     public int bulletSpeed;
-    public int health = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

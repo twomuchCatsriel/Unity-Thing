@@ -40,8 +40,7 @@ public class movement : MonoBehaviour
     void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
-        Debug.Log(isMovingRight);
-
+        
         if (SprintAction.IsPressed()) // Sprint \
         {
             moveSpeed = sprintSpeed;
