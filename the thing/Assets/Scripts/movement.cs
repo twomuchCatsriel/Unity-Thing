@@ -19,6 +19,7 @@ public class movement : MonoBehaviour
     public float jumpHeight;
     public float DefaultmoveSpeed;
     public float sprintSpeed;
+    public bool isMovingRight = false;
 
     float moveSpeed;
 
@@ -39,6 +40,7 @@ public class movement : MonoBehaviour
     void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
+        Debug.Log(isMovingRight);
 
         if (SprintAction.IsPressed()) // Sprint \
         {
@@ -55,11 +57,14 @@ public class movement : MonoBehaviour
             {// Control animations 
                 sr.flipX = true;
                 animator.Play("Niko_Run");
+                isMovingRight = false;
+
             }
             else if (move.x > 0)
             {
                 sr.flipX = false;
                 animator.Play("Niko_Run");
+                isMovingRight = true;
             }
             else
             {

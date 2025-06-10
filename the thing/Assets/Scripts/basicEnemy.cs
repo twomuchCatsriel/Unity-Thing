@@ -9,6 +9,7 @@ public class basicEnemy : MonoBehaviour
     Rigidbody2D rb2d;
     float timebetweenshots;
     public int bulletSpeed;
+    public int health = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,12 +18,7 @@ public class basicEnemy : MonoBehaviour
         bulletRaw = gameObject.transform.Find("Bullet").gameObject;
         rb2d = GetComponent<Rigidbody2D>();
         timebetweenshots = 1;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -44,7 +40,7 @@ public class basicEnemy : MonoBehaviour
                     Debug.Log("Player is too the left");
                     createBullet(1);
                 }
-                timebetweenshots = 2;  
+                timebetweenshots = 2;
             }
         }
     }
