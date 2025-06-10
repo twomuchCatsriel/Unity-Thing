@@ -8,7 +8,7 @@ public class enemyHealthManager : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("FriendlyProjectiles"))
         {
-            if (health <= 0)
+            if (health < 1)
             {
                 Destroy(gameObject);
             }
