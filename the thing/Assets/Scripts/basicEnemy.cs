@@ -15,6 +15,7 @@ public class basicEnemy : MonoBehaviour
     bool playerSide = false;
     public int bulletSpeed;
     public Sprite lookSprite;
+    public Sprite stareSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -64,6 +65,11 @@ public class basicEnemy : MonoBehaviour
         }
     }
 
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        sr.sprite = stareSprite;
+    }
+
     void createBullet(int dir)
     {
         GameObject CloneBullet = Instantiate(bulletRaw);
@@ -74,11 +80,11 @@ public class basicEnemy : MonoBehaviour
 
         if (dir == 0)
         {
-            rb.linearVelocity = new Vector2(bulletSpeed, 0.5f) * 5;
+            rb.linearVelocity = new Vector2(bulletSpeed, 0.6f) * 5;
         }
         else
         {
-            rb.linearVelocity = new Vector2(-bulletSpeed, 0.5f) * 5;
+            rb.linearVelocity = new Vector2(-bulletSpeed, 0.6f) * 5;
         }
 
         Destroy(CloneBullet, 5f);
@@ -98,7 +104,7 @@ public class basicEnemy : MonoBehaviour
         }
     }
 
-    void setPlayerSide(bool dir)
+    void setPlayerSide(bool dir) // This is such a messy way to do this but it works lmfao
     {
         if (!dir)
         {

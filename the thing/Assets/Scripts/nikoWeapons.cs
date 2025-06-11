@@ -63,6 +63,8 @@ public class nikoWeapons : MonoBehaviour
             Debug.Log(msg);
             canAttack = false;
             cooldown = defaultGunCooldown;
+
+            anim.Play("Niko_Shoot");
         }
         else if (type == true) // sword
         {
