@@ -126,8 +126,8 @@ TextureImporter:
         y: 227
         width: 158
         height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.4300927, y: 0.5418384}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -148,8 +148,8 @@ TextureImporter:
         y: 227
         width: 164
         height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.41861874, y: 0.54968315}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,8 +170,8 @@ TextureImporter:
         y: 17
         width: 176
         height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.38494405, y: 0.5366089}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 437a095298db39e4393512485ebe9dde
     internalID: 0
     vertices: []
     indices: 
@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      smol_bang_bang_png_scaled_6x_pngcrushed_0: -3079046342392057816
+      smol_bang_bang_png_scaled_6x_pngcrushed_1: 5733409546263308621
+      smol_bang_bang_png_scaled_6x_pngcrushed_2: -2068143227754330195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

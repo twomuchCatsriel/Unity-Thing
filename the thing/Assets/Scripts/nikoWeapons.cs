@@ -76,11 +76,11 @@ public class nikoWeapons : MonoBehaviour
 
             if (movementScript.isMovingRight)
             {
-                cloneRB.linearVelocity = new Vector2(bulletSpeed, 0.5f) * 5;
+                cloneRB.linearVelocity = new Vector2(bulletSpeed, 2f) * 5;
             }
             else
             {
-                cloneRB.linearVelocity = new Vector2(-bulletSpeed, 0.5f) * 5;
+                cloneRB.linearVelocity = new Vector2(-bulletSpeed, 2f) * 5;
             }
 
             Destroy(clone, 1f);

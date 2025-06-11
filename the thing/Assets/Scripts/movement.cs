@@ -19,7 +19,7 @@ public class movement : MonoBehaviour
     public float jumpHeight;
     public float DefaultmoveSpeed;
     public float sprintSpeed;
-    public bool isMovingRight = false;
+    public bool isMovingRight = true;
 
     float moveSpeed;
 
