@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7435650639081822091}
   - component: {fileID: 805350379845554363}
   - component: {fileID: -1594074765850419132}
+  - component: {fileID: 8303208764373732632}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemies
@@ -229,7 +230,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 60
+  m_Mass: 120
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -257,7 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 3
-  lookSprite: {fileID: 0}
+  lookSprite: {fileID: -5539844695804267433, guid: 0ecd5fe372dbe514297aec0e912b7849, type: 3}
+  stareSprite: {fileID: -870099891156077180, guid: 0ecd5fe372dbe514297aec0e912b7849, type: 3}
 --- !u!114 &-1594074765850419132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +273,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
+--- !u!95 &8303208764373732632
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633352375166340973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e391a72fb6228594aa56d620624284cc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6848977711843816807
 PrefabInstance:
   m_ObjectHideFlags: 0

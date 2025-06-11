@@ -12,7 +12,7 @@ public class enemyHealthManager : MonoBehaviour
         }
     }
 
-    public void Damage(int dmg)
+    public void Damage(float dmg)
     {
         health -= dmg;
     }

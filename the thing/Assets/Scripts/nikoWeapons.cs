@@ -11,8 +11,10 @@ public class nikoWeapons : MonoBehaviour
     Animator anim;
 
     float cooldown = -1;
-    float defaultGunCooldown = 0.25f;
+    float defaultGunCooldown = 0.30f;
     float defaultSwordCooldown = 0.4f;
+    public int bulletSpeed;
+    GameObject bulletR;
 
     movement movementScript;
     float offsetAmount = 1.4f;
@@ -28,6 +30,7 @@ public class nikoWeapons : MonoBehaviour
         AttackAction = InputSystem.actions.FindAction("Attack");
         ShootAction = InputSystem.actions.FindAction("Shoot");
         hitbox = gameObject.transform.GetChild(0).gameObject;
+        bulletR = gameObject.transform.Find("Bullet").gameObject;
 
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -65,6 +68,22 @@ public class nikoWeapons : MonoBehaviour
             cooldown = defaultGunCooldown;
 
             anim.Play("Niko_Shoot");
+
+            GameObject clone = Instantiate(bulletR);
+            clone.transform.position = gameObject.transform.position;
+
+            Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
+
+            if (movementScript.isMovingRight)
+            {
+                cloneRB.linearVelocity = new Vector2(bulletSpeed, 0.5f) * 5;
+            }
+            else
+            {
+                cloneRB.linearVelocity = new Vector2(-bulletSpeed, 0.5f) * 5;
+            }
+
+            Destroy(clone, 1f);
         }
         else if (type == true) // sword
         {
