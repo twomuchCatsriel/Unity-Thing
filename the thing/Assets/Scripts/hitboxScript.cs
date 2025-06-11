@@ -9,7 +9,8 @@ public class hitboxScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemies"))
         {
             enemyHealthManager script = collision.GetComponent<enemyHealthManager>();
-            script.health -= swordDamage;
+            script.Damage(1);
+            script.CheckHealth();
         }
     }
 }

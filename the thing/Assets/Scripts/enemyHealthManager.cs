@@ -4,14 +4,16 @@ public class enemyHealthManager : MonoBehaviour
 {
     public float health;
 
-    void OnTriggerEnter2D(Collider2D collision)
+    public void CheckHealth()
     {
-        if (collision.gameObject.CompareTag("FriendlyProjectiles"))
+        if (health <= 0)
         {
-            if (health < 1)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
+    }
+
+    public void Damage(int dmg)
+    {
+        health -= dmg;
     }
 }
