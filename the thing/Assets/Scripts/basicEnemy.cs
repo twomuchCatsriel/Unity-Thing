@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Unity.Burst.Intrinsics;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class basicEnemy : MonoBehaviour
@@ -7,15 +8,22 @@ public class basicEnemy : MonoBehaviour
     GameObject DetectionRange;
     GameObject bulletRaw;
     Rigidbody2D rb2d;
-    float timebetweenshots;
-    public int bulletSpeed;
+    SpriteRenderer sr;
+    Animator anim;
 
+    float timebetweenshots;
+    bool playerSide = false;
+    public int bulletSpeed;
+    public Sprite lookSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DetectionRange = gameObject.transform.Find("Enemy_Detection_Range").gameObject;
         bulletRaw = gameObject.transform.Find("Bullet").gameObject;
         rb2d = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
         timebetweenshots = 1;
 
     }
@@ -26,17 +34,29 @@ public class basicEnemy : MonoBehaviour
         {
             timebetweenshots -= Time.deltaTime;
 
+            if (collision.transform.position.x > gameObject.transform.position.x) // check if the player is left or right
+            {
+                ManageAnimations(false);
+            }
+            else
+            {
+                ManageAnimations(true);
+            }
+
+
             if (timebetweenshots <= 0)
             {
 
-                if (collision.transform.position.x > gameObject.transform.position.x)
+                if (playerSide == false)
                 {
                     Debug.Log("Player is too the right");
+
                     createBullet(0);
                 }
-                else if (collision.transform.position.x < gameObject.transform.position.x)
+                else if (playerSide == true)
                 {
                     Debug.Log("Player is too the left");
+
                     createBullet(1);
                 }
                 timebetweenshots = 2;
@@ -62,5 +82,33 @@ public class basicEnemy : MonoBehaviour
         }
 
         Destroy(CloneBullet, 5f);
+    }
+
+    void ManageAnimations(bool dir)
+    {
+        if (timebetweenshots <= 0)
+        {
+            setPlayerSide(dir);
+            anim.Play("Barrens_Ranged_Look");
+        }
+        else if(timebetweenshots <= 0.75)
+        {
+            setPlayerSide(dir);
+            anim.Play("Barrens_Ranged_Shoot");
+        }
+    }
+
+    void setPlayerSide(bool dir)
+    {
+        if (!dir)
+        {
+            playerSide = false;
+            sr.flipX = playerSide;
+        }
+        else
+        {
+            playerSide = true;
+            sr.flipX = playerSide;
+        }
     }
 }
