@@ -5176,7 +5176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: patrolRange
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: patrolRangeLeft
