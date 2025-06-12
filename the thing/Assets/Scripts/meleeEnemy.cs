@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 
 public class meleeEnemy : MonoBehaviour
@@ -14,6 +15,7 @@ public class meleeEnemy : MonoBehaviour
 
     bool playerDetected = false;
     bool playerInAttackRange = false;
+    bool direction = false;
 
     GameObject enemyAttackRange;
     GameObject enemyDetectionRange;
@@ -21,6 +23,7 @@ public class meleeEnemy : MonoBehaviour
 
     float maxPatrolLeft;
     float maxPatrolRight;
+    float destination;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,19 +37,53 @@ public class meleeEnemy : MonoBehaviour
         hitbox = gameObject.transform.Find("Enemy_Swing_Hitbox").gameObject;
 
         maxPatrolLeft = gameObject.transform.position.x - patrolRange;
-        maxPatrolRight = gameObject.transform.position.x + patrolRange; 
+        maxPatrolRight = gameObject.transform.position.x + patrolRange;
+
+        int random = Random.Range(0, 2);
+
+        if (random == 0)
+        {
+            destination = maxPatrolLeft;
+            direction = false;
+        }
+        else
+        {
+            destination = maxPatrolRight;
+            direction = true;
+        }
+
+        Debug.Log(random);
     }
 
     // Update is called once per frame
     void Update()
     {
         float currentPositionX = gameObject.transform.position.x;
-
-        if (playerDetected == false)
+        if (direction == false) // Left
         {
             if (currentPositionX > maxPatrolLeft)
             {
-                rb.linearVelocity = new Vector2(walkSpeed, 0) * 5;
+                destination = maxPatrolLeft;
+                rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
+            }
+
+            if (currentPositionX <= maxPatrolLeft)
+            {
+                direction = !direction;
+            }
+        }
+
+        else if (direction)
+        {
+            if (currentPositionX < maxPatrolRight)
+            {
+                destination = maxPatrolRight;
+                rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);
+            }
+
+            if (currentPositionX >= maxPatrolRight)
+            {
+                direction = !direction;
             }
         }
     }

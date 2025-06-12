@@ -70,7 +70,7 @@ public class nikoWeapons : MonoBehaviour
             anim.Play("Niko_Shoot");
 
             GameObject clone = Instantiate(bulletR);
-            clone.transform.position = gameObject.transform.position;
+            clone.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.3f);
 
             Rigidbody2D cloneRB = clone.GetComponent<Rigidbody2D>();
 

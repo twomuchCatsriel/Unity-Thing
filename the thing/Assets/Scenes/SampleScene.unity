@@ -5172,7 +5172,11 @@ PrefabInstance:
       objectReference: {fileID: -4699636377754087040, guid: 401b9bd380ba7934b8d18504567dd73a, type: 3}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: walkSpeed
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
+      propertyPath: patrolRange
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: patrolRangeLeft
