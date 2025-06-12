@@ -15,7 +15,7 @@ public class meleeEnemy : MonoBehaviour
 
     bool playerDetected = false;
     bool playerInAttackRange = false;
-    bool direction = false;
+    bool direction = true;
 
     GameObject enemyAttackRange;
     GameObject enemyDetectionRange;
@@ -24,6 +24,8 @@ public class meleeEnemy : MonoBehaviour
     float maxPatrolLeft;
     float maxPatrolRight;
     float destination;
+    float canSwitchAnim;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,29 +40,17 @@ public class meleeEnemy : MonoBehaviour
 
         maxPatrolLeft = gameObject.transform.position.x - patrolRange;
         maxPatrolRight = gameObject.transform.position.x + patrolRange;
-
-        int random = Random.Range(0, 2);
-
-        if (random == 0)
-        {
-            destination = maxPatrolLeft;
-            direction = false;
-        }
-        else
-        {
-            destination = maxPatrolRight;
-            direction = true;
-        }
-
-        Debug.Log(random);
     }
 
     // Update is called once per frame
     void Update()
     {
         float currentPositionX = gameObject.transform.position.x;
+        canSwitchAnim -= Time.deltaTime;
+
         if (direction == false) // Left
         {
+
             if (currentPositionX > maxPatrolLeft)
             {
                 destination = maxPatrolLeft;
@@ -70,6 +60,8 @@ public class meleeEnemy : MonoBehaviour
             if (currentPositionX <= maxPatrolLeft)
             {
                 direction = !direction;
+                sr.flipX = false;
+                canSwitchAnim = 1f;
             }
         }
 
@@ -84,7 +76,11 @@ public class meleeEnemy : MonoBehaviour
             if (currentPositionX >= maxPatrolRight)
             {
                 direction = !direction;
+                sr.flipX = true;
+                canSwitchAnim = 1f;
+
             }
         }
+
     }
 }
