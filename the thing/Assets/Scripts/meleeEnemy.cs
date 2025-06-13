@@ -10,18 +10,18 @@ public class meleeEnemy : MonoBehaviour
 
     public float patrolRange;
     public float walkSpeed;
+    public float runSpeed;
 
     Animator anim;
     SpriteRenderer sr;
     Rigidbody2D rb;
 
-    bool playerDetected = false;
-    bool playerInAttackRange = false;
     bool direction = true;
 
     enemyDetectionRange detectRangeScript;
-    GameObject hitbox;
+    enemySlashHitbox enemySlash;
     GameObject edr;
+    GameObject esh;
 
     float maxPatrolLeft;
     float maxPatrolRight;
@@ -38,12 +38,10 @@ public class meleeEnemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         edr = gameObject.transform.Find("Enemy_Detection_Range").gameObject;
-        
-
+        esh = gameObject.transform.Find("Enemy_Attack_Range").gameObject;
 
         detectRangeScript = edr.GetComponent<enemyDetectionRange>();
-
-        hitbox = gameObject.transform.Find("Enemy_Swing_Hitbox").gameObject;
+        enemySlash = esh.GetComponent<enemySlashHitbox>();
 
         maxPatrolLeft = gameObject.transform.position.x - patrolRange;
         maxPatrolRight = gameObject.transform.position.x + patrolRange;
@@ -102,9 +100,22 @@ public class meleeEnemy : MonoBehaviour
         }
         else
         {
-            if (detectRangeScript.playerPosition.x < gameObject.transform.position.x)
+            if (enemySlash.playerIsInRange == false)
             {
-                Debug.Log("Player is too too the left");
+                if (detectRangeScript.playerPosition.x < gameObject.transform.position.x)
+                {
+                    rb.linearVelocity = new Vector2(-runSpeed, rb.linearVelocityY);
+                    sr.flipX = true;
+                }
+                else if (detectRangeScript.playerPosition.x > gameObject.transform.position.x)
+                {
+                    rb.linearVelocity = new Vector2(runSpeed, rb.linearVelocityY);
+                    sr.flipX = false;
+                }
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
             }
         }
     }

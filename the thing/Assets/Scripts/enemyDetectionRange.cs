@@ -11,7 +11,6 @@ public class enemyDetectionRange : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsInRange = true;
-            Debug.Log(playerIsInRange);
 
         }
     }
@@ -21,7 +20,6 @@ public class enemyDetectionRange : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsInRange = false;
-            Debug.Log(playerIsInRange);
         }
     }
 
