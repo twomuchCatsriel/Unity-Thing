@@ -4958,6 +4958,7 @@ GameObject:
   - component: {fileID: 1886390305}
   - component: {fileID: 1886390307}
   - component: {fileID: 1886390306}
+  - component: {fileID: 1886390308}
   m_Layer: 0
   m_Name: Enemy_Detection_Range
   m_TagString: Untagged
@@ -5053,6 +5054,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1886390308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886390304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e77c1df2ec76874587fbcbd48b4548c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIsInRange: 0
+  playerPosition: {x: 0, y: 0}
 --- !u!1 &1976846850 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3772495074820860676, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}

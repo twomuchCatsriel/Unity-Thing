@@ -19,9 +19,9 @@ public class meleeEnemy : MonoBehaviour
     bool playerInAttackRange = false;
     bool direction = true;
 
-    GameObject enemyAttackRange;
-    GameObject enemyDetectionRange;
+    enemyDetectionRange detectRangeScript;
     GameObject hitbox;
+    GameObject edr;
 
     float maxPatrolLeft;
     float maxPatrolRight;
@@ -37,9 +37,12 @@ public class meleeEnemy : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        edr = gameObject.transform.Find("Enemy_Detection_Range").gameObject;
+        
 
-        enemyAttackRange = gameObject.transform.Find("Enemy_Attack_Range").gameObject;
-        enemyDetectionRange = gameObject.transform.Find("Enemy_Detection_Range").gameObject;
+
+        detectRangeScript = edr.GetComponent<enemyDetectionRange>();
+
         hitbox = gameObject.transform.Find("Enemy_Swing_Hitbox").gameObject;
 
         maxPatrolLeft = gameObject.transform.position.x - patrolRange;
@@ -58,42 +61,51 @@ public class meleeEnemy : MonoBehaviour
 
         canSwitchAnim -= Time.deltaTime;
 
-        if (direction == false) // Left
+        if (detectRangeScript.playerIsInRange == false)
         {
-            if (currentPositionX > maxPatrolLeft && playingSwitch == false)
+            if (direction == false) // Left
             {
-                destination = maxPatrolLeft;
-                rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
-                anim.Play("Barrens_Melee_Patrol_Walk");
-            }
+                if (currentPositionX > maxPatrolLeft && playingSwitch == false)
+                {
+                    destination = maxPatrolLeft;
+                    rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
+                    anim.Play("Barrens_Melee_Patrol_Walk");
+                }
 
-            if (currentPositionX <= maxPatrolLeft)
+                if (currentPositionX <= maxPatrolLeft)
+                {
+                    direction = !direction;
+                    sr.flipX = false;
+                    canSwitchAnim = 1f;
+                    playingSwitch = true;
+                    anim.Play("Barrens_Melee_Patrol_Switch");
+                }
+            }
+            else if (direction)
             {
-                direction = !direction;
-                sr.flipX = false;
-                canSwitchAnim = 1f;
-                playingSwitch = true;
-                anim.Play("Barrens_Melee_Patrol_Switch");
+                if (currentPositionX < maxPatrolRight && playingSwitch == false)
+                {
+                    destination = maxPatrolRight;
+                    rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);
+                    anim.Play("Barrens_Melee_Patrol_Walk");
+                }
+
+                if (currentPositionX >= maxPatrolRight)
+                {
+                    direction = !direction;
+                    sr.flipX = true;
+                    canSwitchAnim = 1;
+                    playingSwitch = true;
+                    anim.Play("Barrens_Melee_Patrol_Switch");
+                }
             }
         }
-        else if (direction)
+        else
         {
-            if (currentPositionX < maxPatrolRight && playingSwitch == false)
+            if (detectRangeScript.playerPosition.x < gameObject.transform.position.x)
             {
-                destination = maxPatrolRight;
-                rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);
-                anim.Play("Barrens_Melee_Patrol_Walk");
-            }
-
-            if (currentPositionX >= maxPatrolRight)
-            {
-                direction = !direction;
-                sr.flipX = true;
-                canSwitchAnim = 1;
-                playingSwitch = true;
-                anim.Play("Barrens_Melee_Patrol_Switch");
+                Debug.Log("Player is too too the left");
             }
         }
-
     }
 }
