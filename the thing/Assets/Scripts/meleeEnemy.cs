@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using Mono.Cecil;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,7 +26,9 @@ public class meleeEnemy : MonoBehaviour
     float maxPatrolLeft;
     float maxPatrolRight;
     float destination;
-    float canSwitchAnim;
+
+    float canSwitchAnim = 0;
+    bool playingSwitch = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,15 +50,21 @@ public class meleeEnemy : MonoBehaviour
     void Update()
     {
         float currentPositionX = gameObject.transform.position.x;
+
+        if (canSwitchAnim < 0)
+        {
+            playingSwitch = false;
+        }
+
         canSwitchAnim -= Time.deltaTime;
 
         if (direction == false) // Left
         {
-
-            if (currentPositionX > maxPatrolLeft)
+            if (currentPositionX > maxPatrolLeft && playingSwitch == false)
             {
                 destination = maxPatrolLeft;
                 rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
+                anim.Play("Barrens_Melee_Patrol_Walk");
             }
 
             if (currentPositionX <= maxPatrolLeft)
@@ -62,23 +72,26 @@ public class meleeEnemy : MonoBehaviour
                 direction = !direction;
                 sr.flipX = false;
                 canSwitchAnim = 1f;
+                playingSwitch = true;
+                anim.Play("Barrens_Melee_Patrol_Switch");
             }
         }
-
         else if (direction)
         {
-            if (currentPositionX < maxPatrolRight)
+            if (currentPositionX < maxPatrolRight && playingSwitch == false)
             {
                 destination = maxPatrolRight;
                 rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);
+                anim.Play("Barrens_Melee_Patrol_Walk");
             }
 
             if (currentPositionX >= maxPatrolRight)
             {
                 direction = !direction;
                 sr.flipX = true;
-                canSwitchAnim = 1f;
-
+                canSwitchAnim = 1;
+                playingSwitch = true;
+                anim.Play("Barrens_Melee_Patrol_Switch");
             }
         }
 
