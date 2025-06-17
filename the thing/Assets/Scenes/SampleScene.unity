@@ -4720,6 +4720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIsInRange: 0
   defaultCooldown: 0
+  isPlayingSlash: 0
 --- !u!1 &1856689975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4848,11 +4849,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5966731760908925482, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966731760908925482, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966731760908925482, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
+      propertyPath: m_Offset.x
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: runSpeed
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8126440832185224488, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       propertyPath: walkSpeed
