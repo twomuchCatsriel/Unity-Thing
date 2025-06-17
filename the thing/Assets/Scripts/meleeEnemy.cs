@@ -16,7 +16,7 @@ public class meleeEnemy : MonoBehaviour
     SpriteRenderer sr;
     Rigidbody2D rb;
 
-    bool direction = true;
+    bool direction = false;
 
     enemyDetectionRange detectRangeScript;
     enemySlashHitbox enemySlash;

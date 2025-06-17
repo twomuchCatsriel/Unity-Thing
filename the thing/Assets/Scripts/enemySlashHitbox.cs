@@ -16,7 +16,7 @@ public class enemySlashHitbox : MonoBehaviour
     {
         meleeEnemy = gameObject.transform.parent.gameObject;
         hitbox = gameObject.transform.parent.GetChild(2).gameObject;
-        playerIsInRange = true;
+        playerIsInRange = false;
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -24,11 +24,6 @@ public class enemySlashHitbox : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             currentCooldown -= Time.deltaTime;
-
-            if (collision.transform.position.x > meleeEnemy.transform.position.x)
-            {
-                Debug.Log("Player is left LOL");
-            }
 
             if (currentCooldown < 0)
             {
