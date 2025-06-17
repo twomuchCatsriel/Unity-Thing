@@ -16,7 +16,7 @@ public class meleeEnemy : MonoBehaviour
     SpriteRenderer sr;
     Rigidbody2D rb;
 
-    bool direction = false;
+    bool direction = true;
 
     enemyDetectionRange detectRangeScript;
     enemySlashHitbox enemySlash;
@@ -63,7 +63,7 @@ public class meleeEnemy : MonoBehaviour
         {
             if (direction == false) // Left
             {
-                if (currentPositionX > maxPatrolLeft && playingSwitch == false)
+                if (currentPositionX > maxPatrolLeft && playingSwitch == false && enemySlash.isPlayingSlash == false)
                 {
                     destination = maxPatrolLeft;
                     rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
@@ -81,7 +81,7 @@ public class meleeEnemy : MonoBehaviour
             }
             else if (direction)
             {
-                if (currentPositionX < maxPatrolRight && playingSwitch == false)
+                if (currentPositionX < maxPatrolRight && playingSwitch == false && enemySlash.isPlayingSlash == false)
                 {
                     destination = maxPatrolRight;
                     rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);

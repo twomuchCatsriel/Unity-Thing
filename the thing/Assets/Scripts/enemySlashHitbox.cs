@@ -1,22 +1,35 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class enemySlashHitbox : MonoBehaviour
 {
     public bool playerIsInRange = false;
     public float defaultCooldown;
-    bool playerIsRight = false;
+    public bool isPlayingSlash = false;
 
-    float currentCooldown = 0.5f;
+    float currentCooldown = 1f;
+    float hitboxDuration = 0.75f;
 
-    GameObject hitbox;
+    BoxCollider2D hitbox;
+
     GameObject meleeEnemy;
+    enemyDetectionRange enemyDetectionScript;
+    GameObject hitboxObject;
 
+    Animator anim;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        hitbox = gameObject.transform.parent.GetChild(2).GetComponent<BoxCollider2D>();
+        enemyDetectionScript = gameObject.transform.parent.GetChild(1).GetComponent<enemyDetectionRange>();
+        hitboxObject = gameObject.transform.parent.GetChild(2).gameObject;
         meleeEnemy = gameObject.transform.parent.gameObject;
-        hitbox = gameObject.transform.parent.GetChild(2).gameObject;
+
+        anim = meleeEnemy.GetComponent<Animator>();
+
         playerIsInRange = false;
+
+        Debug.Log(hitbox);
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -24,12 +37,19 @@ public class enemySlashHitbox : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             currentCooldown -= Time.deltaTime;
+            hitboxDuration -= Time.deltaTime;
 
             if (currentCooldown < 0)
             {
                 Attack();
             }
+
+            if (hitboxDuration < 0 || playerIsInRange == false)
+            {
+                hitboxObject.SetActive(false);
+            }
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -46,10 +66,26 @@ public class enemySlashHitbox : MonoBehaviour
         {
             playerIsInRange = false;
         }
+
+        hitboxObject.SetActive(false);
     }
 
     void Attack()
     {
-        
+        currentCooldown = 1.5f;
+        hitboxDuration = 0.75f;
+
+        hitboxObject.SetActive(true);
+        isPlayingSlash = true;
+        anim.Play("Barrens_Melee_Attack");
+
+        if (enemyDetectionScript.playerIsRight == false)
+        {
+            hitbox.offset = new Vector2(2f, 0);
+        }
+        else if (enemyDetectionScript.playerIsRight)
+        {
+            hitbox.offset = new Vector2(-2f, 0);
+        }
     }
 }
