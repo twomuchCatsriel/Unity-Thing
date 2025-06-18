@@ -7,7 +7,7 @@ public class enemySlashHitbox : MonoBehaviour
     public float defaultCooldown;
     public bool isPlayingSlash = false;
 
-    float currentCooldown = 1f;
+    float currentCooldown = 0.2f;
     float hitboxDuration = 0.75f;
 
     BoxCollider2D hitbox;
