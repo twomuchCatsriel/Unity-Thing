@@ -4721,6 +4721,24 @@ MonoBehaviour:
   playerIsInRange: 0
   defaultCooldown: 0
   isPlayingSlash: 0
+--- !u!1 &1720324223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3772495074820860676, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
+  m_PrefabInstance: {fileID: 6258329376328452011}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1720324231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720324223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7cc35d0c30771f489e5f4c05bfb8a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationState: 0
 --- !u!1 &1856689975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4911,6 +4929,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3772495074820860676, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1720324231}
     - targetCorrespondingSourceObject: {fileID: 5352901312131939076, guid: abd9d8ed4a8288040b633a6330d747ae, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1609921362}

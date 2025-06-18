@@ -15,6 +15,7 @@ public class enemySlashHitbox : MonoBehaviour
     GameObject meleeEnemy;
     enemyDetectionRange enemyDetectionScript;
     GameObject hitboxObject;
+    meleeAnimationManager animScript;
 
     Animator anim;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,6 +25,7 @@ public class enemySlashHitbox : MonoBehaviour
         enemyDetectionScript = gameObject.transform.parent.GetChild(1).GetComponent<enemyDetectionRange>();
         hitboxObject = gameObject.transform.parent.GetChild(2).gameObject;
         meleeEnemy = gameObject.transform.parent.gameObject;
+        animScript = gameObject.transform.GetComponentInParent<meleeAnimationManager>();
 
         anim = meleeEnemy.GetComponent<Animator>();
 
@@ -31,25 +33,22 @@ public class enemySlashHitbox : MonoBehaviour
 
         Debug.Log(hitbox);
     }
-
-    void OnTriggerStay2D(Collider2D collision)
+    
+    void Update()
     {
-        if (collision.CompareTag("Player"))
+        currentCooldown -= Time.deltaTime;
+        hitboxDuration -= Time.deltaTime;
+
+        if (currentCooldown < 0)
         {
-            currentCooldown -= Time.deltaTime;
-            hitboxDuration -= Time.deltaTime;
-
-            if (currentCooldown < 0)
-            {
-                Attack();
-            }
-
-            if (hitboxDuration < 0 || playerIsInRange == false)
-            {
-                hitboxObject.SetActive(false);
-            }
+            Attack();
         }
 
+        if (hitboxDuration < 0 || playerIsInRange == false)
+        {
+            animScript.animationState = 0;
+            hitboxObject.SetActive(false);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +71,7 @@ public class enemySlashHitbox : MonoBehaviour
 
     void Attack()
     {
+        animScript.animationState = 1;
         currentCooldown = 1.5f;
         hitboxDuration = 0.75f;
 

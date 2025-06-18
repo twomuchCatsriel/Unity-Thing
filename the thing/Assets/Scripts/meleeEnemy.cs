@@ -27,14 +27,9 @@ public class meleeEnemy : MonoBehaviour
     float maxPatrolRight;
     float destination;
 
-    float canSwitchAnim = 0;
-    bool playingSwitch = false;
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         edr = gameObject.transform.Find("Enemy_Detection_Range").gameObject;
@@ -52,49 +47,34 @@ public class meleeEnemy : MonoBehaviour
     {
         float currentPositionX = gameObject.transform.position.x;
 
-        if (canSwitchAnim < 0)
-        {
-            playingSwitch = false;
-        }
-
-        canSwitchAnim -= Time.deltaTime;
-
         if (detectRangeScript.playerIsInRange == false)
         {
             if (direction == false) // Left
             {
-                if (currentPositionX > maxPatrolLeft && playingSwitch == false && enemySlash.isPlayingSlash == false)
+                if (currentPositionX > maxPatrolLeft)
                 {
                     destination = maxPatrolLeft;
                     rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocityY);
-                    anim.Play("Barrens_Melee_Patrol_Walk");
                 }
 
                 if (currentPositionX <= maxPatrolLeft)
                 {
                     direction = !direction;
                     sr.flipX = false;
-                    canSwitchAnim = 1f;
-                    playingSwitch = true;
-                    anim.Play("Barrens_Melee_Patrol_Switch");
                 }
             }
             else if (direction)
             {
-                if (currentPositionX < maxPatrolRight && playingSwitch == false && enemySlash.isPlayingSlash == false)
+                if (currentPositionX < maxPatrolRight)
                 {
                     destination = maxPatrolRight;
                     rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocityY);
-                    anim.Play("Barrens_Melee_Patrol_Walk");
                 }
 
                 if (currentPositionX >= maxPatrolRight)
                 {
                     direction = !direction;
                     sr.flipX = true;
-                    canSwitchAnim = 1;
-                    playingSwitch = true;
-                    anim.Play("Barrens_Melee_Patrol_Switch");
                 }
             }
         }
