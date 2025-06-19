@@ -20,6 +20,7 @@ public class movement : MonoBehaviour
     public float DefaultmoveSpeed;
     public float sprintSpeed;
     public bool isMovingRight = true;
+    public Vector2 playerPos;
 
     float moveSpeed;
 
@@ -34,12 +35,14 @@ public class movement : MonoBehaviour
         moveSpeed = DefaultmoveSpeed;
 
         weaponsScript = GetComponent<nikoWeapons>();
+        playerPos = new Vector2(0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector2 move = moveAction.ReadValue<Vector2>();
+        playerPos = gameObject.transform.position;
         
         if (SprintAction.IsPressed()) // Sprint \
         {
