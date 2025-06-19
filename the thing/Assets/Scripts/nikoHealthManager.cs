@@ -6,11 +6,12 @@ public class nikoHealthManager : MonoBehaviour
 {
     public int health;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI loseText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class nikoHealthManager : MonoBehaviour
         {
             Debug.Log("dead");
             gameObject.SetActive(false);
+            showText();
         }
     }
 
@@ -30,5 +32,11 @@ public class nikoHealthManager : MonoBehaviour
             health -= 1;
             healthText.text = "Health: " + health;
         }
+    }
+
+    void showText()
+    {
+        healthText.enabled = false;
+        loseText.enabled = true;
     }
 }
